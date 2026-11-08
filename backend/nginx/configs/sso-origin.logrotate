@@ -1,0 +1,8 @@
+/home/uadmin/nginx/sso-logs/incoming.jsonl /home/uadmin/nginx/sso-logs/uploads.jsonl {
+    daily
+    rotate 14
+    compress
+    missingok
+    notifempty
+    create 0600 uadmin uadmin
+}

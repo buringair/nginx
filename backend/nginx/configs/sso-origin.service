@@ -1,0 +1,25 @@
+[Unit]
+Description=SSO configuration and log origin
+After=network.target
+
+[Service]
+Type=simple
+User=uadmin
+Group=uadmin
+WorkingDirectory=/opt/sso-origin
+Environment=SSO_CONFIG_ROOT=/home/uadmin/nginx/root
+Environment=SSO_LOG_DIR=/home/uadmin/nginx/sso-logs
+Environment=SSO_LISTEN_HOST=127.0.0.1
+Environment=SSO_LISTEN_PORT=8080
+Environment=SSO_MAX_BODY_BYTES=1048576
+ExecStart=/usr/bin/python3 /opt/sso-origin/sso_origin.py
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/home/uadmin/nginx/sso-logs /home/uadmin/nginx/root/bigquery
+InaccessiblePaths=/home/uadmin/nginx/configs/certs
+
+[Install]
+WantedBy=multi-user.target

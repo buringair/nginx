@@ -1,0 +1,13 @@
+/home/uadmin/nginx/logs/sso-config_get_access.log /home/uadmin/nginx/logs/sso-logging_post_access.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 root adm
+    sharedscripts
+    postrotate
+        /usr/bin/systemctl kill -s USR1 --kill-who=main nginx.service
+    endscript
+}
